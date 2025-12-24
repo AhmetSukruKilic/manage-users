@@ -54,25 +54,25 @@ docker-compose up --build
 curl http://localhost:8080/health
 ```
 
-### Register a User (POST /auth/register)
+### Login (POST /auth/login)
 
-The recommended way to create a new user:
+Login with email and password:
 
 ```bash
 curl -X POST \
--d '{"name": "Test", "email": "test@example.com", "password": "securepasswd"}' \
+-d '{"email": "test@example.com", "password": "securepasswd"}' \
 -H 'Content-Type: application/json' \
-http://localhost:8080/auth/register
+http://localhost:8080/auth/login
 ```
 
-**Response (201)**:
+**Response (200)**:
 ```json
 {"id": 1, "name": "Test", "email": "test@example.com"}
 ```
 
 **Errors**:
 - `400`: Bad request
-- `403`: User with that email already exists
+- `401`: Invalid email or password
 - `500`: Server error
 
 ### Add a User (PUT /users)
